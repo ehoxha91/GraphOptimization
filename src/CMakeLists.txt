@@ -1,11 +1,11 @@
+#sudo ln -s /usr/include/eigen3/Eigen /usr/local/include/Eigen - If Eigen library is not linked!
+
 LIST( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules )
 SET( G2O_ROOT /usr/local/include/g2o )
 FIND_PACKAGE( G2O REQUIRED )
 
 FIND_PACKAGE( CSparse REQUIRED )
 INCLUDE_DIRECTORIES( ${G2O_INCLUDE_DIR} ${CSPARSE_INCLUDE_DIR} )
-
-FIND_PACKAGE( Eigen3 REQUIRED )
 
 ADD_LIBRARY( optimizer_eh OptimizerE.cc )
 TARGET_LINK_LIBRARIES( 

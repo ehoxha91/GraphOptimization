@@ -4,9 +4,9 @@
 #include <vector>
 #include <map>
 
-//Eigen
-#include <eigen3/Eigen/Core>
-#include <eigen3/Eigen/Geometry>
+using namespace std;
+
+
 
 //We should check which ones we need!!!
 #include <g2o/types/slam3d/types_slam3d.h>
@@ -27,6 +27,9 @@
 #include <g2o/types/slam3d/vertex_se3.h>
 #include <g2o/types/slam3d/edge_se3.h>
 
+//Eigen
+//#include <eigen3/Eigen/Core>
+//#include <eigen3/Eigen/Geometry>
 
 class OptimizerE
 {
