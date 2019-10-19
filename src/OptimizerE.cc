@@ -1,6 +1,13 @@
 
 #include "OptimizerE.h"
 
+OptimizerE::OptimizerE()
+{
+	std::unique_ptr<g2o::BlockSolver_6_3::LinearSolverType> linearSolver (new g2o::LinearSolverEigen<g2o::BlockSolver_6_3::PoseMatrixType>());
+	std::unique_ptr<g2o::BlockSolver_6_3> blockSolver (new g2o::BlockSolver_6_3(std::move(linearSolver)));
+	g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg(std::move(blockSolver));
+	globalOptimizer.setAlgorithm(solver);
+}
 
 void OptimizerE::AddVertex(int _vertexID)
 {
@@ -41,14 +48,14 @@ void OptimizerE::Optimize(int _iterations)
 	globalOptimizer.save("optimizedGraph.g2o");
 }
 
-void OptimizerE::SaveGraph(string name)
+void OptimizerE::SaveGraph(string _name)
 {
-	globalOptimizer.save(name);
-	cout <<GREEN"\nGraph saved: "<<name<<endl;
+	//globalOptimizer.save(_name);
+	//cout <<GREEN"\nGraph saved: "<<_name<<endl;
 }
 
 void OptimizerE::ClearOptimizer()
 {
      globalOptimizer.clear();
-     cout <<YELLOW"\nGraph saved: "<<name<<endl;
+     cout <<YELLOW"\nCleared!";
 }

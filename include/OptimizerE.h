@@ -6,9 +6,6 @@
 
 using namespace std;
 
-
-
-//We should check which ones we need!!!
 #include <g2o/types/slam3d/types_slam3d.h>
 #include <g2o/core/sparse_optimizer.h>
 #include <g2o/core/block_solver.h>
@@ -27,29 +24,24 @@ using namespace std;
 #include <g2o/types/slam3d/vertex_se3.h>
 #include <g2o/types/slam3d/edge_se3.h>
 
-//Eigen
-//#include <eigen3/Eigen/Core>
-//#include <eigen3/Eigen/Geometry>
 
 class OptimizerE
 {
 	public:		
-		std::unique_ptr<g2o::BlockSolver_6_3::LinearSolverType> linearSolver (new g2o::LinearSolverEigen<g2o::BlockSolver_6_3::PoseMatrixType>());
-		std::unique_ptr<g2o::BlockSolver_6_3> blockSolver (new g2o::BlockSolver_6_3(std::move(linearSolver)));
-		g2o::OptimizationAlgorithmLevenberg* solver = new g2o::OptimizationAlgorithmLevenberg(std::move(blockSolver));
+		OptimizerE();
 		g2o::SparseOptimizer globalOptimizer;
+
 		void AddVertex(int _vertexID);		//Add vertex to the graph
 		void SetEstimate(); 						//Set vertex estimate
 		void GetEstimate(int _vertexID);				//Get vertex estimate
-		//Add edge between two vertices, set 1/Covariance matrix and set relationship between those two vertices (T-Homogenous transformation matrix)
+		//Add edge between two vertices, set (Covariance matrix)^(-1) and set relationship between those two vertices (T-Homogenous transformation matrix)
 		void AddEdge(int _vertex_1_ID, int _vertex_2_ID, Eigen::Matrix<double, 6, 6> _information, Eigen::Isometry3d _T);
 		void Optimize(int _iterations);					//Optimize!
 		void SaveGraph(string name);					//Save current graph;
 		void ClearOptimizer();						//Clear graph!
-}
+};
 
 //Define some colors for terminal...
-
 #define RESET "\033[0m"
 #define BLACK "\033[30m" /* Black */
 #define RED "\033[31m" /* Red */
