@@ -1,3 +1,26 @@
+/**
+ *  @file OptimizerE.h
+ *  @author Ejup Hoxha <ejup.hoxha@gmail.com>
+ * 
+ *  @section LICENSE
+ * 
+ *  Copyright (C) 2019, City University of New York
+ *  CCNY Robotics Lab <http://robotics.ccny.cuny.edu>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -28,17 +51,21 @@ using namespace std;
 class OptimizerE
 {
 	public:		
-		OptimizerE();
+		OptimizerE();				//Constructor
+		~OptimizerE();				//Destructor
 		g2o::SparseOptimizer globalOptimizer;
 
 		void AddVertex(int _vertexID);		//Add vertex to the graph
-		void SetEstimate(); 						//Set vertex estimate
-		void GetEstimate(int _vertexID);				//Get vertex estimate
-		//Add edge between two vertices, set (Covariance matrix)^(-1) and set relationship between those two vertices (T-Homogenous transformation matrix)
+		void SetEstimate(); 			//Set vertex estimate
+		void GetEstimate(int _vertexID);	//Get vertex estimate
+		
+		// Add edge between two vertices, set (Covariance matrix)^(-1) 
+		// and set relationship between those two vertices (T-Homogenous transformation matrix)
 		void AddEdge(int _vertex_1_ID, int _vertex_2_ID, Eigen::Matrix<double, 6, 6> _information, Eigen::Isometry3d _T);
-		void Optimize(int _iterations);					//Optimize!
-		void SaveGraph(string name);					//Save current graph;
-		void ClearOptimizer();						//Clear graph!
+	
+		void Optimize(int _iterations);		//Optimize!
+		void SaveGraph(string name);		//Save current graph;
+		void ClearOptimizer();			//Clear graph!
 };
 
 //Define some colors for terminal...
