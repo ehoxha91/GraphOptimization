@@ -26,6 +26,7 @@
 
 int main(int argc, char **argv)
 {
+	/*
 	OptimizerE graph;
 	graph.AddVertex(1);	// Add vertex 1; Estimate is set as: [Eigen::Isometry3d::Identity()]
 	graph.AddVertex(2);  // Add vertex 2
@@ -46,7 +47,7 @@ int main(int argc, char **argv)
 	graph.AddEdge(1, 2, infoMatrix, T)
 	int iterations =10;
 	graph.Optimize(iterations);
-
+	*/
 	cout << "Optimization Project!\n";
 	return 0;
 }
